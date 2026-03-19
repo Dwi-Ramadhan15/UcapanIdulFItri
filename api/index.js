@@ -168,7 +168,7 @@ app.get('/', (req, res) => {
                 <p style="margin-bottom: 1rem;">Ada pesan spesial untukmu.</p>
                 
                 <div class="input-group">
-                    <label>Siapa namamu?</label>
+                    <label>Input namamu disini ya 😀</label>
                     <input type="text" id="guestName" placeholder="Ketik nama di sini..." autocomplete="off">
                 </div>
                 
