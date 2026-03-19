@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
                 width: 100%;
                 height: 100%;
                 pointer-events: none;
-                z-index: -1;
+                z-index: 0;
             }
             .star {
                 position: absolute;
@@ -56,6 +56,8 @@ app.get('/', (req, res) => {
             }
             
             .container {
+                position: relative;
+                z-index: 1;
                 width: 100%;
                 max-width: 500px;
                 margin: 0 auto;
