@@ -34,22 +34,25 @@ app.get('/', (req, res) => {
                 justify-content: center;
                 align-items: center;
                 text-align: center;
-                overflow: hidden;
+                overflow-x: hidden;
+                overflow-y: auto; /* Memungkinkan scroll vertikal */
             }
             .container {
                 position: relative;
                 width: 100%;
                 max-width: 500px;
-                padding: 2rem;
+                padding: 2rem 1rem; /* Padding agar tidak mentok saat scroll */
+                box-sizing: border-box;
             }
             .card {
                 background: rgba(255, 255, 255, 0.02);
                 backdrop-filter: blur(12px);
                 border: 1px solid rgba(212, 175, 55, 0.15);
-                padding: 3rem 2rem;
+                padding: 3rem 1.5rem;
                 border-radius: 24px;
                 box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 0 20px rgba(212, 175, 55, 0.05);
                 transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                margin: 1rem 0; /* Margin tambahan untuk card */
             }
             h1 {
                 font-family: 'Playfair Display', serif;
@@ -84,7 +87,7 @@ app.get('/', (req, res) => {
                 letter-spacing: 1px;
             }
             input[type="text"] {
-                width: 80%;
+                width: 85%;
                 background: transparent;
                 border: none;
                 border-bottom: 2px solid rgba(212, 175, 55, 0.3);
@@ -166,12 +169,10 @@ app.get('/', (req, res) => {
                 <h2>Selamat Hari Raya</h2>
                 <h1>Idul Fitri 1447 H</h1>
                 <p style="margin-bottom: 1rem;">Ada pesan spesial untukmu.</p>
-                
                 <div class="input-group">
                     <label>Input namamu disini ya 😀</label>
                     <input type="text" id="guestName" placeholder="Ketik nama di sini..." autocomplete="off">
                 </div>
-                
                 <button onclick="openCard()">Buka Pesan</button>
             </div>
 
@@ -179,7 +180,6 @@ app.get('/', (req, res) => {
                 <div class="moon">🌙✨</div>
                 <h2>Teruntuk,</h2>
                 <div class="recipient-name" id="display-name">Fulan</div>
-                
                 <p>
                     Taqabbalallahu minna wa minkum.<br>
                     Minal 'Aidin wal Faizin<br>
@@ -187,7 +187,6 @@ app.get('/', (req, res) => {
                     Di hari yang fitri ini, mari kita bersihkan hati dan saling memaafkan. 
                     Semoga Allah SWT menerima amal ibadah kita, dan memberikan kita kedamaian serta keberkahan.
                 </p>
-                
                 <div class="sender">
                     Salam Hangat,<br>
                     <strong>Dwi Ramadhan & Keluarga</strong>
@@ -201,33 +200,30 @@ app.get('/', (req, res) => {
             function openCard() {
                 const music = document.getElementById('bgMusic');
                 music.volume = 0.5;
-                music.play();
+                music.play().catch(e => console.log("Music play failed:", e));
 
                 let nameInput = document.getElementById('guestName').value;
-                
-                if (nameInput.trim() === '') {
-                    nameInput = 'Sahabatku';
-                }
+                if (nameInput.trim() === '') nameInput = 'Sahabatku';
 
                 document.getElementById('display-name').innerText = nameInput;
-
                 document.getElementById('screen-1').classList.remove('active');
                 
                 setTimeout(() => {
                     document.getElementById('screen-2').classList.add('active');
+                    window.scrollTo(0, 0); // Reset scroll ke atas saat ganti layar
                 }, 100);
             }
 
             function backToStart() {
                 document.getElementById('screen-2').classList.remove('active');
                 document.getElementById('guestName').value = ''; 
-                
                 const music = document.getElementById('bgMusic');
                 music.pause();
                 music.currentTime = 0;
                 
                 setTimeout(() => {
                     document.getElementById('screen-1').classList.add('active');
+                    window.scrollTo(0, 0);
                 }, 100);
             }
         </script>
