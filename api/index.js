@@ -23,32 +23,28 @@ app.get('/', (req, res) => {
                 --text-light: #e0e0e0;
             }
             
+            /* --- KEMBALI KE DASAR: TANPA KUNCIAN SAMA SEKALI --- */
             html, body {
                 margin: 0;
                 padding: 0;
-                width: 100%;
-                min-height: 100%;
-                overflow-x: hidden;
-                overflow-y: auto !important;
-                -webkit-overflow-scrolling: touch; 
                 background-color: var(--primary-bg);
             }
             
             body {
-                background-image: radial-gradient(circle at 50% 0%, #153a24 0%, transparent 70%);
+                background-image: radial-gradient(circle at top center, #153a24 0%, transparent 70%);
                 background-attachment: fixed;
                 color: var(--gold);
                 font-family: 'Poppins', sans-serif;
+                padding: 3rem 1rem 5rem 1rem; /* Jarak murni: atas 3rem, kiri-kanan 1rem, bawah 5rem */
             }
             
             .container {
                 width: 100%;
                 max-width: 500px;
-                margin: 0 auto;
-                padding: 3rem 1.5rem 6rem 1.5rem; 
-                box-sizing: border-box;
+                margin: 0 auto; /* Cuma ditengahkan secara horizontal */
                 text-align: center;
             }
+            /* ---------------------------------------------------- */
 
             .card {
                 background: rgba(255, 255, 255, 0.02);
@@ -221,7 +217,7 @@ app.get('/', (req, res) => {
                 
                 setTimeout(() => {
                     document.getElementById('screen-2').classList.add('active');
-                    window.scrollTo({ top: 0, behavior: 'smooth' }); 
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }, 100);
             }
 
@@ -235,7 +231,7 @@ app.get('/', (req, res) => {
                 
                 setTimeout(() => {
                     document.getElementById('screen-1').classList.add('active');
-                    window.scrollTo({ top: 0, behavior: 'smooth' }); 
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }, 100);
             }
         </script>
