@@ -169,11 +169,14 @@ app.get('/', (req, res) => {
                 <div class="moon">🕌</div>
                 <h2>Selamat Hari Raya</h2>
                 <h1>Idul Fitri 1447 H</h1>
-                <p style="margin-bottom: 1rem;">Ada pesan spesial untukmu.</p>
                 
                 <div class="input-group">
-                    <label>Input namamu disini ya 😀</label>
-                    <input type="text" id="guestName" placeholder="Ketik nama di sini..." autocomplete="off">
+                    <input type="text" id="guestName" placeholder="Ketik nama di sini..." autocomplete="off"><br>
+                </div>
+
+                <div class="sender" style="margin-top: 0; margin-bottom: 2rem;">
+                    Salam Hangat,<br>
+                    <strong>Dwi Ramadhan & Keluarga</strong>
                 </div>
                 
                 <button onclick="openCard()">Buka Pesan</button>
