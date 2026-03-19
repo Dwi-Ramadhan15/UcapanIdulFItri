@@ -23,32 +23,32 @@ app.get('/', (req, res) => {
                 --text-light: #e0e0e0;
             }
             
-            /* --- PERBAIKAN SCROLL DI SINI --- */
             html, body {
                 margin: 0;
                 padding: 0;
-                min-height: 100vh;
+                width: 100%;
+                min-height: 100%;
+                overflow-x: hidden;
+                overflow-y: auto !important;
+                -webkit-overflow-scrolling: touch; 
                 background-color: var(--primary-bg);
-                /* Memastikan background warna memenuhi halaman walaupun di-scroll */
             }
             
             body {
                 background-image: radial-gradient(circle at 50% 0%, #153a24 0%, transparent 70%);
-                background-attachment: fixed; /* Biar gradiennya diam saat di-scroll */
+                background-attachment: fixed;
                 color: var(--gold);
                 font-family: 'Poppins', sans-serif;
-                /* display flex dihapus agar tidak mengunci scroll di HP */
             }
             
             .container {
                 width: 100%;
                 max-width: 500px;
-                margin: 0 auto; /* Otomatis ke tengah secara horizontal */
-                padding: 8vh 1rem 3rem 1rem; /* Jarak atas 8vh, kiri-kanan 1rem, bawah 3rem */
+                margin: 0 auto;
+                padding: 3rem 1.5rem 6rem 1.5rem; 
                 box-sizing: border-box;
                 text-align: center;
             }
-            /* -------------------------------- */
 
             .card {
                 background: rgba(255, 255, 255, 0.02);
@@ -212,18 +212,16 @@ app.get('/', (req, res) => {
                 music.play().catch(e => console.log(e));
 
                 let nameInput = document.getElementById('guestName').value;
-                
                 if (nameInput.trim() === '') {
                     nameInput = 'Sahabatku';
                 }
 
                 document.getElementById('display-name').innerText = nameInput;
-
                 document.getElementById('screen-1').classList.remove('active');
                 
                 setTimeout(() => {
                     document.getElementById('screen-2').classList.add('active');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    window.scrollTo({ top: 0, behavior: 'smooth' }); 
                 }, 100);
             }
 
@@ -237,7 +235,7 @@ app.get('/', (req, res) => {
                 
                 setTimeout(() => {
                     document.getElementById('screen-1').classList.add('active');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    window.scrollTo({ top: 0, behavior: 'smooth' }); 
                 }, 100);
             }
         </script>
