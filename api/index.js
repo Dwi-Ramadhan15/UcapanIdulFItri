@@ -22,28 +22,34 @@ app.get('/', (req, res) => {
                 --gold-light: #f3e5ab;
                 --text-light: #e0e0e0;
             }
-            body {
+            
+            /* --- PERBAIKAN SCROLL DI SINI --- */
+            html, body {
                 margin: 0;
-                padding: 2rem 0; /* Memberikan ruang di atas dan bawah */
+                padding: 0;
                 min-height: 100vh;
                 background-color: var(--primary-bg);
+                /* Memastikan background warna memenuhi halaman walaupun di-scroll */
+            }
+            
+            body {
                 background-image: radial-gradient(circle at 50% 0%, #153a24 0%, transparent 70%);
+                background-attachment: fixed; /* Biar gradiennya diam saat di-scroll */
                 color: var(--gold);
                 font-family: 'Poppins', sans-serif;
-                display: flex;
-                justify-content: center;
-                /* align-items dihapus agar tidak memotong layar saat scroll */
-                box-sizing: border-box;
-                overflow-x: hidden; /* Hanya menghilangkan scroll samping */
+                /* display flex dihapus agar tidak mengunci scroll di HP */
             }
+            
             .container {
-                position: relative;
                 width: 100%;
                 max-width: 500px;
-                padding: 0 1rem;
-                margin: auto; /* Otomatis ke tengah secara vertikal kalau layarnya besar */
+                margin: 0 auto; /* Otomatis ke tengah secara horizontal */
+                padding: 8vh 1rem 3rem 1rem; /* Jarak atas 8vh, kiri-kanan 1rem, bawah 3rem */
                 box-sizing: border-box;
+                text-align: center;
             }
+            /* -------------------------------- */
+
             .card {
                 background: rgba(255, 255, 255, 0.02);
                 backdrop-filter: blur(12px);
@@ -51,8 +57,6 @@ app.get('/', (req, res) => {
                 padding: 3rem 1.5rem;
                 border-radius: 24px;
                 box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 0 20px rgba(212, 175, 55, 0.05);
-                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-                text-align: center;
             }
             h1 {
                 font-family: 'Playfair Display', serif;
@@ -114,6 +118,7 @@ app.get('/', (req, res) => {
                 cursor: pointer;
                 transition: all 0.3s ease;
                 letter-spacing: 1px;
+                margin-bottom: 1rem;
             }
             button:hover {
                 background: var(--gold);
@@ -195,8 +200,8 @@ app.get('/', (req, res) => {
                     Salam Hangat,<br>
                     <strong>Dwi Ramadhan & Keluarga</strong>
                 </div>
-                <br>
-                <button onclick="backToStart()" style="padding: 0.5rem 1.5rem; font-size: 0.8rem; margin-top: 1rem;">Kembali</button>
+                <br><br>
+                <button onclick="backToStart()" style="padding: 0.5rem 1.5rem; font-size: 0.8rem;">Kembali</button>
             </div>
         </div>
 
@@ -204,7 +209,7 @@ app.get('/', (req, res) => {
             function openCard() {
                 const music = document.getElementById('bgMusic');
                 music.volume = 0.5;
-                music.play().catch(e => console.log(e)); // Menangkap error audio kalau ada
+                music.play().catch(e => console.log(e));
 
                 let nameInput = document.getElementById('guestName').value;
                 
@@ -218,7 +223,7 @@ app.get('/', (req, res) => {
                 
                 setTimeout(() => {
                     document.getElementById('screen-2').classList.add('active');
-                    window.scrollTo(0, 0); // Memaksa browser kembali ke posisi paling atas
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }, 100);
             }
 
@@ -232,7 +237,7 @@ app.get('/', (req, res) => {
                 
                 setTimeout(() => {
                     document.getElementById('screen-1').classList.add('active');
-                    window.scrollTo(0, 0); // Memaksa browser kembali ke posisi paling atas
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }, 100);
             }
         </script>
