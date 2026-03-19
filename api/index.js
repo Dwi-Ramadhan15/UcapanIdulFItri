@@ -23,7 +23,6 @@ app.get('/', (req, res) => {
                 --text-light: #e0e0e0;
             }
             
-            /* --- KEMBALI KE DASAR: TANPA KUNCIAN SAMA SEKALI --- */
             html, body {
                 margin: 0;
                 padding: 0;
@@ -35,16 +34,33 @@ app.get('/', (req, res) => {
                 background-attachment: fixed;
                 color: var(--gold);
                 font-family: 'Poppins', sans-serif;
-                padding: 3rem 1rem 5rem 1rem; /* Jarak murni: atas 3rem, kiri-kanan 1rem, bawah 5rem */
+                padding: 3rem 1rem 5rem 1rem;
+                overflow-x: hidden;
+            }
+            
+            #stars {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: -1;
+            }
+            .star {
+                position: absolute;
+                background-color: #fff;
+                border-radius: 50%;
+                opacity: 0;
+                animation: starDrift linear infinite;
             }
             
             .container {
                 width: 100%;
                 max-width: 500px;
-                margin: 0 auto; /* Cuma ditengahkan secara horizontal */
+                margin: 0 auto;
                 text-align: center;
             }
-            /* ---------------------------------------------------- */
 
             .card {
                 background: rgba(255, 255, 255, 0.02);
@@ -61,6 +77,7 @@ app.get('/', (req, res) => {
                 font-weight: 700;
                 color: var(--gold-light);
                 margin-top: 0;
+                animation: glowPulse 3s ease-in-out infinite;
             }
             h2 {
                 font-family: 'Playfair Display', serif;
@@ -101,6 +118,7 @@ app.get('/', (req, res) => {
             }
             input[type="text"]:focus {
                 border-bottom-color: var(--gold);
+                box-shadow: 0 2px 5px rgba(212,175,55,0.1);
             }
             button {
                 background: transparent;
@@ -120,10 +138,11 @@ app.get('/', (req, res) => {
                 background: var(--gold);
                 color: var(--primary-bg);
                 box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+                transform: translateY(-2px);
             }
             .screen {
                 display: none;
-                animation: fadeIn 0.8s ease-out forwards;
+                animation: fadeInEnhanced 0.8s ease-out forwards;
             }
             .screen.active {
                 display: block;
@@ -136,6 +155,7 @@ app.get('/', (req, res) => {
                 font-weight: 700;
                 border-bottom: 1px solid rgba(212, 175, 55, 0.2);
                 padding-bottom: 1rem;
+                animation: glowPulse 4s ease-in-out infinite;
             }
             .sender {
                 font-family: 'Playfair Display', serif;
@@ -149,17 +169,28 @@ app.get('/', (req, res) => {
                 animation: float 3s ease-in-out infinite;
                 text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
             }
-            @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(15px); }
-                to { opacity: 1; transform: translateY(0); }
+            @keyframes fadeInEnhanced {
+                from { opacity: 0; transform: translateY(15px) scale(0.95); }
+                to { opacity: 1; transform: translateY(0) scale(1); }
             }
             @keyframes float {
                 0%, 100% { transform: translateY(0px); }
                 50% { transform: translateY(-8px); }
             }
+            @keyframes starDrift {
+                0% { top: 110vh; opacity: 0; transform: scale(0.5); }
+                10% { opacity: 1; transform: scale(1); }
+                90% { opacity: 1; transform: scale(1); }
+                100% { top: -10vh; opacity: 0; transform: scale(0.5); }
+            }
+            @keyframes glowPulse {
+                0%, 100% { text-shadow: 0 0 5px rgba(212,175,55,0.1); }
+                50% { text-shadow: 0 0 15px rgba(212,175,55,0.4); }
+            }
         </style>
     </head>
     <body>
+        <div id="stars"></div>
         <audio id="bgMusic" loop>
             <source src="/assets/idulfitri.mp3" type="audio/mpeg">
         </audio>
@@ -205,6 +236,34 @@ app.get('/', (req, res) => {
         </div>
 
         <script>
+            function generateStars() {
+                const container = document.getElementById('stars');
+                const starCount = 60;
+                
+                for (let i = 0; i < starCount; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    
+                    const size = Math.random() * 2.5 + 1 + 'px';
+                    star.style.width = size;
+                    star.style.height = size;
+                    star.style.left = Math.random() * 100 + 'vw';
+                    
+                    const duration = Math.random() * 8 + 6;
+                    star.style.animationDuration = duration + 's';
+                    
+                    const delay = Math.random() * 15;
+                    star.style.animationDelay = '-' + delay + 's';
+                    
+                    if (Math.random() > 0.7) {
+                        star.style.backgroundColor = '#d4af37'; 
+                        star.style.boxShadow = '0 0 6px #d4af37';
+                    }
+
+                    container.appendChild(star);
+                }
+            }
+
             function openCard() {
                 const music = document.getElementById('bgMusic');
                 music.volume = 0.5;
@@ -237,6 +296,8 @@ app.get('/', (req, res) => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }, 100);
             }
+
+            generateStars();
         </script>
     </body>
     </html>
