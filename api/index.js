@@ -230,7 +230,7 @@ app.get('/', (req, res) => {
                 
                 <div class="sender">
                     Salam Hangat,<br>
-                    <strong>Dwi Ramadhan & Keluarga</strong>
+                    <strong>Keluarga Besar Bpk. Yanto</strong>
                 </div>
                 <br><br>
                 <button onclick="backToStart()" style="padding: 0.5rem 1.5rem; font-size: 0.8rem;">Kembali</button>
@@ -273,7 +273,7 @@ app.get('/', (req, res) => {
 
                 let nameInput = document.getElementById('guestName').value;
                 if (nameInput.trim() === '') {
-                    nameInput = 'Sahabatku';
+                    nameInput = 'Saudaraku';
                 }
 
                 document.getElementById('display-name').innerText = nameInput;
