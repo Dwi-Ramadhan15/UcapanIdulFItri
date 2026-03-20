@@ -209,7 +209,7 @@ app.get('/', (req, res) => {
 
                 <div class="sender" style="margin-top: 0; margin-bottom: 2rem;">
                     Salam Hangat,<br>
-                    <strong>Dwi Ramadhan & Keluarga</strong>
+                    <strong> Keluarga Besar Bpk. Yanto</strong>
                 </div>
                 
                 <button onclick="openCard()">Buka Pesan</button>
